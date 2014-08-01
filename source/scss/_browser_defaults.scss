@@ -1,0 +1,66 @@
+/* use proper box model */
+*, *:before, *:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+// decrease font sizes for World Services to make content fit
+html[lang="ru"] .main,
+html[lang="uk"] .main {
+    font-size: 13px;
+    line-height: 16px;
+}
+html[lang="id"] .main {
+    font-size: 15px;
+    line-height: 21px;
+}
+
+.main {
+    color: #404040;
+    font-size: 16px;
+    line-height: 22px;
+
+    img {
+        width: 100%;
+    }
+
+    a {
+        font-family: Arial, Helmet, Freesans, sans-serif;
+        color: #1F4F82;
+        text-decoration: none;
+        font-weight: bold;
+
+        &:hover {
+            text-decoration: underline;
+            outline: none;
+        }
+
+        &:active {
+            color: #D1700E;
+        }
+
+        &:visited {
+            color: #4A7194;
+        }
+    }
+
+    h2 {
+        font-size: 1.125em;
+        margin: 24px 0 16px 0;
+    }
+
+    p {
+        margin: 16px 0;
+    }
+
+    ul {
+        margin: 0 8px 16px 8px;
+        padding: 0;
+        list-style-type: none;
+
+        li {
+            border-top: 1px solid #cdcdcd;
+        }
+    }
+}

@@ -1,0 +1,526 @@
+$screen-width-offset: 16px;
+$graph-color-overall: #007f7f;
+$graph-color-male: #522751;
+$graph-color-female: #cc0000;
+$graph-multiplier-group-1: 1.7%;
+$graph-multiplier-group-3: 1.48%;
+$graph-multiplier-group-4: 1.76%;
+
+@import "news_special/defaults";
+@import "browser_defaults";
+
+.main {
+
+    .facewall__intro-cta {
+        display: none;
+    }
+
+    @include respondMinMax(768px - $screen-width-offset, false) {
+        .facewall__intro-cta {
+            display: block;
+            color: $graph-color-overall;
+            background-image: url('../img/hand.png');
+            background-repeat: no-repeat;
+            padding-left: 25px;
+            font-size: 0.96em;
+        }
+    }
+
+    .facewall__list-background_image {
+        display: none;
+    }
+
+    .facewall__detail {
+        padding: 0;
+        margin: 0 8px 24px 8px;
+        border-top: 1px solid #404040;
+
+        .facewall__intro {
+            display: block;
+        }
+
+        .facewall__current-profile {
+            display: none;
+        }
+
+        transition: margin-top 600ms;
+    }
+
+    .facewall__intro-text {
+        
+    }
+
+    .facewall__intro-text--bold {
+        font-weight: bold;
+    }
+
+    .facewall__reset-link {
+        display: none;
+        clear: both;
+        font-weight: bold;
+        padding-top: 8px;
+    }
+
+    .facewall__properties {
+        overflow: hidden;
+        padding-left: 10px;
+    }
+
+    .facewall__list-item {
+        clear: both;
+        padding: 8px 0;
+        position: relative;
+    }
+
+    .facewall__property {
+        display: block;
+        font-size: 1.2em;
+        font-weight: bold;
+        margin: 0;
+    }
+
+    .facewall__property--hidden {
+        display: none;
+    }
+
+    .facewall__vis__sub-header {
+        margin: 0 0 12px 0;
+        font-size: 1.125em;
+        font-weight: normal;
+    }
+
+    .facewall__vis--age-ranges,
+    .facewall__vis--gender {
+        margin: 0;
+
+        li {
+            border: none;
+            display: block;
+            clear: both;
+            min-height: 18px;
+            margin-top: 4px;
+
+            span {
+                display: block;
+                float: left;
+                margin-right: 8px;
+            }
+
+            .facewall--value {
+                font-weight: bold;
+                font-family: Helvetica, sans-serif;
+            }
+        }
+    }
+
+    .facewall__graph--gender {
+
+        width: 90%;
+        margin: 38px 0 0 0;
+        position: relative;
+        clear: both;
+
+        span {
+            display: block;
+            float: left;
+            height: 16px;
+            padding: 0;
+            margin: 0;
+        }
+
+        .facewall--male {
+            background-color: $graph-color-male;
+        }
+
+        .facewall--female {
+            background-color: $graph-color-female;
+        }
+    }
+
+    .facewall__vis--gender {
+        clear: both;
+        display: block;
+        width: 90%;
+        margin-top: 32px;
+
+        .facewall--graph-bar {
+            display: none;
+        }
+
+        .facewall--all {
+
+            padding-top: 4px;
+        }
+
+        .facewall--male {
+
+            .facewall--value {
+                color: $graph-color-male;
+            }
+        }
+
+        .facewall--female {
+
+            .facewall--value {
+                color: $graph-color-female;
+            }
+        }
+    }
+
+    .facewall__vis--nationalities {
+        li {
+            border: 0;
+            clear: left;
+
+            &:last-child {
+                margin-bottom: 32px;
+            }
+        }
+        .facewall__label {
+            width: 48%;
+            text-align: right;
+            margin-right: 0.5em;
+            float: left;
+        }
+
+        .facewall__graph_bar_container {
+            position: relative;
+            display: block;
+            border-left: 1px solid grey;
+            padding-bottom: 8px;
+            float: left;
+            width: 48%;
+        }
+
+        li:last-child .facewall__graph_bar_container {
+            // otherwise we have an overhang on the grey bar
+            padding: 0;
+        }
+
+        @include respondMinMax (320px, 550px) {
+            .facewall__label {
+                width: 25%;
+            }
+            .facewall__graph_bar_container {
+                width: 70%;
+            }
+        }
+
+        @include respondMinMax (550px, 768px - $screen-width-offset) {
+            .facewall__label {
+                width: 15%;
+            }
+            .facewall__graph_bar_container {
+                width: 82%;
+            }
+        }
+
+        @include respondMinMax (768px - $screen-width-offset, 974px) {
+            .facewall__label {
+                width: 47%;
+            }
+            .facewall__graph_bar_container {
+                width: 49%;
+            }
+        }
+
+        @include respondMinMax (974px, false) {
+            .facewall__label {
+                width: 28%;
+            }
+            .facewall__graph_bar_container {
+                width: 68%;
+            }
+        }
+
+        .facewall__graph_bar {
+            display: block;
+            height: 16px;
+            background-color: $graph-color-overall;
+            width: 0;
+            overflow: hidden;
+            float: left;
+        }
+        .facewall__graph_bar--highlight {
+            background-color: #00b0b3;
+        }
+
+        .facewall__value {
+            position: absolute;
+            top: 0;
+
+            strong {
+                font-weight: bold;
+            }
+        }
+    }
+
+    .facewall__graph_divider {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 52.68456375838926%;
+        width: 1px;
+        height: 16px;
+        background: white;
+    }
+
+    @include respondMinMax (768px - $screen-width-offset, false) {
+
+        .facewall__vis--gender {
+
+            li {
+                clear: both;
+            }
+
+            .facewall--all {
+                padding-top: 4px;
+            }
+        }
+    }
+
+    @include respondMinMax (480px - $screen-width-offset, 767px - $screen-width-offset ) {
+
+        .facewall__list {
+            clear: both;
+        }
+
+        .facewall__vis--gender {
+
+            li {
+                clear: none;
+                width: 28%;
+                float: left;
+
+                span {
+                    display: inline-block;
+                    float: none;
+                }
+            }
+
+            .facewall--all {
+                width: 44%;
+                padding-top: 0;
+            }
+
+            .facewall--female {
+                text-align: right;
+
+                span {
+                    text-align: right;
+                }
+
+                .facewall--value {
+                    margin: 0;
+                }
+            }
+        }
+    }
+
+    @include respondMinMax (974px, false) {
+
+        .facewall__vis--gender {
+
+            li {
+                clear: none;
+                width: 28%;
+                float: left;
+
+                span {
+                    display: inline-block;
+                    float: none;
+                }
+            }
+
+            .facewall--all {
+                width: 44%;
+                padding-top: 0;
+            }
+
+            .facewall--female {
+                text-align: right;
+
+                span {
+                    text-align: right;
+                }
+
+                .facewall--value {
+                    margin: 0;
+                }
+            }
+        }
+    }
+
+    @include respondMinMax (220px - $screen-width-offset, false) {
+        .facewall__vis--gender .facewall--graph-bar {
+            display: block;
+        }
+    }
+
+    .facewall--thumbs-enabled { 
+
+        padding-top: 16px;
+
+        .facewall__thumb {
+            display: block;
+            float: left;
+            height: 70px;
+            width: 70px;
+            background-repeat: no-repeat;
+            background-size: 100%;
+            cursor: default;
+        }
+
+        @include respondMinMax (974px, false) {
+
+            .facewall__thumb {
+                height: 82px;
+                width: 82px;
+                padding: 0;
+                background-size: 100%;
+            }
+        }
+    }
+}
+
+.facewall--grid-layout {
+
+    position: relative;
+    width: 768px - $screen-width-offset;
+
+    @include respondMinMax (974px, false) {
+        width: 973px - $screen-width-offset;
+    }
+
+    .facewall__list-item {
+        clear: none;
+    }
+
+    .facewall__tooltip {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 999;
+        min-height: 54px;
+        width: 133px;
+        font-weight: normal;
+        margin: 8px 0 0 0;
+        padding: 8px;
+        color: #fff;
+        background-color: #000;
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    @include respondMinMax (974px, false) {
+        .facewall__tooltip {
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin: 12px 0 0 0;
+            min-height: 66px;
+            width: 159px;
+        }
+    }
+
+    .facewall__tooltip-text {
+        padding: 0;
+        margin:  0;
+    }
+
+    .facewall--thumbs-enabled {
+        
+        width: 474px;
+        float: left;
+        margin: 0 0 0 16px;
+        padding-top: 0;
+
+         li {
+            float: left;
+            border: none;
+            margin: 0 9px 8px 0;
+            padding: 0;
+         }
+
+        @include respondMinMax (974px, false) {
+            width: 560px;
+            margin: 0 0 0 8px;
+
+            li {
+                margin: 0 11px 12px 0;
+            }
+        }
+
+        .facewall__properties {
+            display: none;
+            position: absolute;
+            left: 0;
+            top: 94px;
+            width: 175px;
+            height: 176px;
+            z-index: 99;
+            color: white;
+            background-color: rgb(0,0,0); // ie
+            background-color: rgba(0,0,0,0.8);
+            padding: 0.5em;
+        }
+
+        .facewall__list-item--end_of_row .facewall__properties {
+            left: auto;
+            right: 0;
+        }
+
+        .facewall__list-item--bottom_row .facewall__properties {
+            top: -188px;
+        }
+
+        @include respondMinMax (768px - $screen-width-offset, 974px) {
+            .facewall__properties {
+                top: 78px;
+                width: 149px;
+                height: 148px;
+            }
+
+            .facewall__list-item--bottom_row .facewall__properties {
+                top: -156px;
+            }
+        }
+
+        .facewall__list-item--obscured {
+            opacity: 0.5;
+            transition: opacity 0.3s;
+        }
+
+        .facewall__list-item--hover {
+            opacity: 1;
+
+            .facewall__properties {
+                display: block;
+            }
+        }
+
+        .facewall__property {
+            font-size: 1em;
+            font-weight: normal;
+        }
+
+        .facewall__name {
+            font-weight: bold;
+        }
+
+        .facewall__thumb {
+            position: relative;
+        }
+    }
+
+    .facewall__detail {
+        float: right;
+        width: 236px;
+        margin: 0 16px 0 0;
+
+        @include respondMinMax (974px, false) {
+            width: 376px;
+            margin: 0 8px 0 0;
+        }
+    }
+}

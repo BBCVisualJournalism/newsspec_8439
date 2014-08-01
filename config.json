@@ -1,0 +1,25 @@
+{
+  "debug":          "false",
+  "whichEnv":       "local",
+  "project_number": "8439",
+  "year":           "2014",
+  "imageWidths":    ["320", "640", "1024"],
+  "vocabs": {
+    "passengers": {
+      "googleSpreadsheetId": "",
+      "worksheet":           "Passengers"
+    },
+    "crew": {
+      "googleSpreadsheetId": "",
+      "worksheet":           "Crew"
+    },
+    "scaffolding": {
+      "googleSpreadsheetId": "",
+      "worksheet":           "Scaffolding"
+    }
+  },
+  "services": {
+    "default": "english",
+    "others": ["russian", "ukrainian", "indonesian"]
+  }
+}

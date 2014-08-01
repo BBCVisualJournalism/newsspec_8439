@@ -1,0 +1,80 @@
+<%
+    var personNumber = 0,
+        i;
+%>
+<ul id="facewall__list" class="facewall__list">
+    <%
+        i = 1;
+        while (true) {
+            if (obj['forename_passenger_' + i] === undefined) {
+                break;
+            }
+
+            var offsetInPercent    = (82.05205 / 24370) * 100 * (personNumber),
+                backgroundPosition = personNumber === 0 ? 0 : (offsetInPercent);
+    %>
+        <li id="facewall--<%= personNumber %>" class="facewall__list-item facewall__list-item--passenger" data-has-picture="<%= obj['has_picture_passenger_' + i] === 'yes' %>">
+            <span class="facewall__thumb" data-offset="<%= backgroundPosition %>"></span>
+            <div class="facewall__properties">
+                <p class="facewall__property facewall__name">
+                    <% 
+                        print (obj['nickname_passenger_' + i] === ''
+                            ?
+                            obj['forename_passenger_' + i] + ' ' + obj['surname_passenger_' + i]
+                            :
+                            obj['nickname_passenger_' + i]);
+
+                        if (obj['age_passenger_' + i] !== '') {
+                            print (', ' + obj['age_passenger_' + i]);
+                        }
+                    %>
+                </p>
+                <p class="facewall__property facewall__nationality"><%= obj['nationality_passenger_' + i] %></p>
+
+                <p class="facewall__property--hidden facewall__gender"><%= obj['gender_passenger_' + i] %></p>
+                <p class="facewall__property--hidden facewall__rank">passenger</p>
+            </div>
+        </li>
+    <%
+            i++;
+            personNumber++;
+        }
+    %>
+    <%
+        i = 1;
+        while (true) {
+            if (obj['forename_crew_' + i] === undefined) {
+                break;
+            }
+
+            var offsetInPercent    = (82.05205 / 24370) * 100 * (personNumber),
+                backgroundPosition = personNumber === 0 ? 0 : (offsetInPercent);
+    %>
+        <li id="facewall--<%= personNumber %>" class="facewall__list-item facewall__list-item--crew" data-has-picture="<%= obj['has_picture_crew_' + i] === 'yes' %>">
+            <span class="facewall__thumb" data-offset="<%= backgroundPosition %>"></span>
+            <div class="facewall__properties">
+                <p class="facewall__property facewall__name">
+                    <% 
+                        print (obj['nickname_crew_' + i] === ''
+                            ?
+                            obj['forename_crew_' + i] + ' ' + obj['surname_crew_' + i]
+                            :
+                            obj['nickname_crew_' + i]);
+
+                        if (obj['age_crew_' + i] !== '') {
+                            print (', ' + obj['age_crew_' + i]);
+                        }
+                    %>
+                </p>
+                <p class="facewall__property facewall__nationality"><%= obj['nationality_crew_' + i] %></p>
+
+                <p class="facewall__property--hidden facewall__gender"><%= obj['gender_crew_' + i] %></p>
+                <p class="facewall__property facewall__rank"><%= obj['rank_crew_' + i] %></p>
+            </div>
+        </li>
+    <%
+            i++;
+            personNumber++;
+        }
+    %>
+</ul>

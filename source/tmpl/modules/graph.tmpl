@@ -1,0 +1,108 @@
+<%
+    var totalDeaths = 0,
+        nationalities = [],
+        genders = {
+            male:   0,
+            female: 0
+        };
+
+    for (var i = 1; obj['nationality_crew_' + i] !== undefined; i++) {
+        addToNationalities(obj['nationality_crew_' + i], 'crew');
+        if (obj['gender_crew_' + i] === 'M') {
+            genders.male++;
+        }
+        else if (obj['gender_crew_' + i] === 'F') {
+            genders.female++;
+        }
+    }
+    for (var i = 1; obj['nationality_passenger_' + i] !== undefined; i++) {
+        addToNationalities(obj['nationality_passenger_' + i], 'passenger');
+        if (obj['gender_passenger_' + i] === 'M') {
+            genders.male++;
+        }
+        else if (obj['gender_passenger_' + i] === 'F') {
+            genders.female++;
+        }
+    }
+
+    function addToNationalities(nationality, rank) {
+        var countryObj = {
+            name:  nationality,
+            count: 1,
+            crewCount: rank === 'crew' ? 1 : 0
+        }
+
+        for (var i = 0; i < nationalities.length; i++) {
+            if (nationalities[i].name === nationality) {
+                nationalities[i].count++;
+                if (rank === 'crew') {
+                    nationalities[i].crewCount++;
+                }
+                return true;
+            }
+        }
+
+        nationalities.push(countryObj);
+    }
+
+    nationalities = _.sortBy(nationalities, function (nationality) {
+        return nationality.count;
+    }).reverse();
+    
+    for (var i = 0; i < nationalities.length; i++) {
+        totalDeaths += nationalities[i].count;
+    }
+%>
+
+<h3 class="facewall__vis__sub-header"><%= scaffolding_graph_subheader %></h3>
+<ul class="facewall__vis--nationalities">
+    <%
+        for (var i = 0; i < nationalities.length; i++) {
+            var totalDeathsWidth = ((nationalities[i].count - nationalities[i].crewCount) / totalDeaths) * 100,
+                crewDeathsWidth = (nationalities[i].crewCount / totalDeaths) * 100;
+    %>
+        <li>
+            <span class="facewall__label"><%= nationalities[i].name %></span>
+            <span class="facewall__graph_bar_container">
+                <span class="facewall__graph_bar" style="width: <%= totalDeathsWidth %>%;"></span>
+                <div class="facewall__graph_divider" style="left: <%= totalDeathsWidth %>%;"></div>
+                <span class="facewall__graph_bar facewall__graph_bar--highlight" style="width: <%= crewDeathsWidth %>%;"></span>
+                <span class="facewall__value" style="left: <%= totalDeathsWidth + crewDeathsWidth + 2 %>%;">
+                    <strong><%= nationalities[i].count %></strong>
+                    <%
+                        if (nationalities[i].crewCount > 0) {
+                    %>
+                        (<%= nationalities[i].crewCount %> <%= obj['scaffolding_crew'] %>)
+                    <%
+                        }
+                    %>
+                </span>
+            </span>
+        </li>
+    <% } %>
+</ul>
+
+<div class="facewall__graph--gender">
+    <%
+    var maxWidth = 98, // otherwise on iPad3 the bars move to two lines
+        malePercentage = (genders.male / totalDeaths) * maxWidth;
+    %>
+    <span class="facewall--male"   style="width: <%=  malePercentage %>%;"></span>
+    <div class="facewall__graph_divider" style="left: <%= malePercentage %>%;"></div>
+    <span class="facewall--female" style="width: <%= maxWidth - malePercentage %>%;"></span>
+</div>
+
+<ul class="facewall__vis--gender">
+    <li class="facewall--all">
+        <span class="facewall--label"><%= scaffolding_victims_total %></span>
+        <span class="facewall--value"><%= totalDeaths %></span>
+    </li>
+    <li class="facewall--male">
+        <span class="facewall--label"><%= scaffolding_victims_male %></span>
+        <span class="facewall--value"><%= genders.male %></span>
+    </li>
+    <li class="facewall--female">
+        <span class="facewall--label"><%= scaffolding_victims_female %></span>
+        <span class="facewall--value"><%= genders.female %></span>
+    </li>
+</ul>

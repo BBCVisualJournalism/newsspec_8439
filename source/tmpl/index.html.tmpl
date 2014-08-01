@@ -1,0 +1,28 @@
+<%= include('includes/top.tmpl') %>
+
+    <div class="main">
+        <div id="facewall__detail" class="facewall__detail ns__profile--enabled">
+            <div id="facewall__intro" class="facewall__intro">
+                
+                <p class="facewall__intro-text facewall__intro-text--bold">
+                    <%= scaffolding_intro_text__bold %>
+                </p>
+
+                <p class="facewall__intro-text">
+                    <%= scaffolding_intro_text %>
+                </p>
+
+                <h3 class="facewall__intro-cta"><%= scaffolding_intro_cta %></h3>
+
+                <h2><%= scaffolding_graph_header %></h2>
+
+                <%= include('modules/graph.tmpl') %>
+            </div>
+        </div>
+
+        <%= include('modules/facewall.tmpl') %>
+
+        <div class="facewall__list-background_image" data-src="img/sprite.jpg?cachebuster=cb0000000010"></div>
+    </div>
+
+<%= include('includes/bottom.tmpl') %>
